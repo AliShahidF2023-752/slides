@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSC-224 Comprehensive Final Exam Preparation</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #050510;
+            --bg-card: #10101a;
+            --primary: #00f3ff;
+            --secondary: #bc13fe;
+            --accent: #f0ff00;
+            --text-main: #e0e0e0;
+            --text-muted: #808090;
+            --border: rgba(0, 243, 255, 0.2);
+            --glow: 0 0 10px rgba(0, 243, 255, 0.3);
+            --font-main: 'Rajdhani', sans-serif;
+            --font-header: 'Orbitron', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            font-size: 18px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Headers */
+        h1,
+        h2,
+        h3,
+        h4,
+        .neon-text {
+            font-family: var(--font-header);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        h1 {
+            font-size: 48px;
+            text-align: center;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 40px;
+            text-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+        }
+
+        h2 {
+            font-size: 32px;
+            color: var(--primary);
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 10px;
+            margin-top: 60px;
+            margin-bottom: 30px;
+        }
+
+        h3 {
+            font-size: 24px;
+            color: var(--secondary);
+            margin-top: 30px;
+        }
+
+        /* Navigation / TOC */
+        .toc {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 50px;
+        }
+
+        .toc h2 {
+            margin-top: 0;
+            border: none;
+            font-size: 24px;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 10px;
+        }
+
+        .toc a {
+            display: block;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--primary);
+            text-decoration: none;
+            border-left: 3px solid var(--primary);
+            transition: 0.3s;
+        }
+
+        .toc a:hover {
+            background: rgba(0, 243, 255, 0.1);
+            padding-left: 15px;
+        }
+
+        /* Content Blocks */
+        section {
+            margin-bottom: 60px;
+            page-break-after: always;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        /* Code Blocks */
+        pre {
+            background: #000;
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: var(--font-mono);
+            font-size: 14px;
+        }
+
+        code {
+            font-family: var(--font-mono);
+            color: var(--accent);
+        }
+
+        /* Lists */
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        li::marker {
+            color: var(--secondary);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 16px;
+        }
+
+        th,
+        td {
+            border: 1px solid var(--border);
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: rgba(0, 243, 255, 0.1);
+            color: var(--primary);
+            font-family: var(--font-header);
+        }
+
+        tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        /* MCQs Section */
+        .mcq-container {
+            display: grid;
+            gap: 20px;
+        }
+
+        .mcq-card {
+            background: var(--bg-card);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            page-break-inside: avoid;
+        }
+
+        .question-text {
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .option {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: 0.2s;
+        }
+
+        .option:hover {
+            border-color: var(--border);
+        }
+
+        /* Correct Answer Reveal (for study mode) */
+        display-answer {
+            display: none;
+            /* Hidden by default, reveal with JS or print */
+            margin-top: 10px;
+            color: var(--accent);
+            font-weight: bold;
+            font-family: var(--font-mono);
+            font-size: 14px;
+        }
+
+        .mcq-card:hover display-answer {
+            display: block;
+        }
+
+        /* Hover to reveal */
+
+        /* Final Exam Special Section */
+        .final-special {
+            border: 2px solid var(--accent);
+            background: rgba(240, 255, 0, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 50px;
+        }
+
+        .final-special h2 {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        /* Print Optimization */
+        @media print {
+            @page {
+                margin: 2cm;
+            }
+
+            body {
+                background: #fff;
+                color: #000;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .container {
+                max-width: 100%;
+                padding: 0;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4 {
+                color: #000 !important;
+            }
+
+            h1 {
+                -webkit-text-fill-color: #000;
+                background: none;
+            }
+
+            .toc {
+                display: none;
+            }
+
+            /* Hide TOC in print to save paper? Or keep? Let's keep basics */
+            .card,
+            .mcq-card,
+            pre {
+                border: 1px solid #ccc;
+                background: #f5f5f5 !important;
+                color: #000;
+            }
+
+            code {
+                color: #d00;
+            }
+
+            a {
+                text-decoration: underline;
+                color: #000;
+            }
+
+            /* Force reveal answers for PDF export if desired, or keep as interactive study guide? 
+               User said "exporting to PDF... questions along with ANY answers". 
+               I will make answers visible in print. */
+            display-answer {
+                display: block !important;
+                color: #00aa00;
+            }
+
+            .option {
+                background: #fff;
+                border: 1px solid #ddd;
+            }
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 32px;
+            }
+
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header style="text-align: center; padding: 40px 0;">
+            <div style="font-family: var(--font-mono); color: var(--accent); letter-spacing: 3px; margin-bottom: 10px;">
+                CSC-224 WEB TECHNOLOGIES</div>
+            <h1>FULL COURSE STUDY GUIDE</h1>
+            <p style="color: var(--text-muted); font-size: 20px;">Comprehensive Compilation: Lectures, Labs, Homeworks,
+                Quizzes & Final Exam Prep</p>
+            <div
+                style="margin-top: 20px; padding: 10px; border: 1px solid var(--secondary); display: inline-block; border-radius: 5px; color: var(--secondary); font-family: var(--font-header); font-weight: bold;">
+                COMPILED BY ALI SHAHID
+            </div>
+        </header>
+
+        <div class="toc">
+            <h2>Navigate Content</h2>
+            <ul>
+                <li><a href="#week1">Week 1: Web Fundamentals</a></li>
+                <li><a href="#week2">Week 2: HTML5 Mastery</a></li>
+                <li><a href="#week3">Week 3: CSS & Styling</a></li>
+                <li><a href="#week4">Week 4: Mobile-First & Flexbox</a></li>
+                <li><a href="#week5">Week 5: JS & Node.js</a></li>
+                <li><a href="#week6">Week 6: Express & APIs</a></li>
+                <li><a href="#week7">Week 7: React Basics</a></li>
+                <li><a href="#week9">Week 9: SEO & Analytics</a></li>
+                <li><a href="#week12">Week 12: Case Study (CareDesk)</a></li>
+                <li><a href="#system">System Design (SDLC)</a></li>
+                <li><a href="#srs">Requirements (SRS/IEEE)</a></li>
+                <li><a href="#final">Final Specific Topics</a></li>
+                <li><a href="#mcq">MASTER QUESTION BANK (200+)</a></li>
+                <li><a href="#exam-special">FINAL EXAM SPECIAL SECTION</a></li>
+            </ul>
+        </div>
+
+        <!-- WEEK 1 -->
+        <section id="week1">
+            <h2>Week 1: Web Fundamentals & Architecture</h2>
+            <div class="card">
+                <h3>The Client-Server Model</h3>
+                <p>The web works on a request-response cycle.</p>
+                <ul>
+                    <li><strong>Client:</strong> The browser (Chrome, Safari). Initiates requests.</li>
+                    <li><strong>Server:</strong> The computer storing the website. Processes requests and sends
+                        responses.</li>
+                    <li><strong>Protocol (HTTP):</strong> The language they speak (HyperText Transfer Protocol).</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Core Technologies</h3>
+                <table>
+                    <tr>
+                        <th>Technology</th>
+                        <th>Role</th>
+                        <th>Analogy</th>
+                    </tr>
+                    <tr>
+                        <td><strong>HTML</strong></td>
+                        <td>Structure & Content</td>
+                        <td>The Skeleton</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CSS</strong></td>
+                        <td>Presentation & Style</td>
+                        <td>The Skin/Clothes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>JavaScript</strong></td>
+                        <td>Behavior & Interactivity</td>
+                        <td>The Muscles/Brain</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- WEEK 2 -->
+        <section id="week2">
+            <h2>Week 2: HTML5 Structure & Semantics</h2>
+            <div class="card">
+                <h3>Semantic vs. Non-Semantic</h3>
+                <p><strong>Semantic HTML</strong> means using tags that describe their meaning to both the browser and
+                    the developer.</p>
+                <ul>
+                    <li><strong>Non-Semantic:</strong> <code>&lt;div&gt;</code>, <code>&lt;span&gt;</code> (Tells you
+                        nothing about content)</li>
+                    <li><strong>Semantic:</strong> <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>,
+                        <code>&lt;article&gt;</code>, <code>&lt;footer&gt;</code> (CLEAR meaning)</li>
+                </ul>
+                <p><strong>Why use Semantic?</strong> SEO (Search engines understand better), Accessibility (Screen
+                    readers), and Maintainability.</p>
+            </div>
+
+            <div class="card">
+                <h3>Block vs. Inline Elements</h3>
+                <ul>
+                    <li><strong>Block:</strong> Starts on a new line, takes full width. Examples:
+                        <code>&lt;div&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;h1&gt;</code>,
+                        <code>&lt;section&gt;</code>.</li>
+                    <li><strong>Inline:</strong> Takes only necessary width, no new line. Examples:
+                        <code>&lt;span&gt;</code>, <code>&lt;a&gt;</code>, <code>&lt;img&gt;</code>,
+                        <code>&lt;strong&gt;</code>.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- WEEK 3 -->
+        <section id="week3">
+            <h2>Week 3: CSS Styling & Layouts</h2>
+            <div class="card">
+                <h3>The Box Model</h3>
+                <p>Every element in web design is a rectangular box.</p>
+                <pre>
++---------------------------+
+|        Margin             |
+|  +---------------------+  |
+|  |     Border          |  |
+|  |  +---------------+  |  |
+|  |  |   Padding     |  |  |
+|  |  |  +---------+  |  |  |
+|  |  |  | Content |  |  |  |
+|  |  |  +---------+  |  |  |
+|  |  +---------------+  |  |
+|  +---------------------+  |
++---------------------------+
+            </pre>
+                <p><strong>Calculated Width:</strong> Content + Padding + Border (if
+                    <code>box-sizing: content-box</code>).<br>
+                    <strong>Best Practice:</strong> Use <code>* { box-sizing: border-box; }</code> so padding doesn't
+                    increase width.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Centering in CSS</h3>
+                <p>The age-old problem. Solutions:</p>
+                <ul>
+                    <li><strong>Text:</strong> <code>text-align: center;</code></li>
+                    <li><strong>Block Element:</strong> <code>margin: 0 auto;</code> (requires width)</li>
+                    <li><strong>Modern Way (Flexbox):</strong>
+                        <pre>
+.parent {
+    display: flex;
+    justify-content: center; /* Horizontal */
+    align-items: center;     /* Vertical */
+}
+</pre>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- WEEK 4 -->
+        <section id="week4">
+            <h2>Week 4: Mobile-First & Flexbox</h2>
+            <div class="card">
+                <h3>Mobile-First Design Strategy</h3>
+                <p>Designing for the smallest screen first, then enhancing for larger screens.</p>
+                <ul>
+                    <li><strong>Why?</strong> Performance (load less code for mobile), User Base (more mobile users),
+                        Focus (prioritize content).</li>
+                    <li><strong>Technique:</strong> Use <code>min-width</code> media queries.</li>
+                </ul>
+                <pre>
+/* Base styles = Mobile */
+.container { width: 100%; }
+
+/* Tablet */
+@media (min-width: 768px) {
+    .container { width: 80%; }
+}
+</pre>
+            </div>
+
+            <div class="card">
+                <h3>Flexbox Cheat Sheet</h3>
+                <ul>
+                    <li><code>display: flex;</code> - Activates flexbox.</li>
+                    <li><code>flex-direction: row | column;</code> - Main axis direction.</li>
+                    <li><code>justify-content: flex-start | center | space-between;</code> - Main axis alignment.</li>
+                    <li><code>align-items: stretch | center | flex-start;</code> - Cross axis alignment.</li>
+                    <li><code>flex-wrap: wrap;</code> - Allow items to wrap to next line.</li>
+                    <li><code>gap: 10px;</code> - Space between items.</li>
+                </ul>
+            </div>
+        </section>
+
+
+        <!-- WEEK 5 -->
+        <section id="week5">
+            <h2>Week 5: JavaScript & Node.js Fundamentals</h2>
+            <div class="card">
+                <h3>Variables & Data Types</h3>
+                <ul>
+                    <li><code>const</code>: Cannot be reassigned. Use by default.</li>
+                    <li><code>let</code>: Can be reassigned. Use for counters, state.</li>
+                    <li><code>var</code>: Old function-scoped. Avoid.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Array Methods (Higher Order)</h3>
+                <p>Modern JS relies heavily on these methods:</p>
+                <ul>
+                    <li><code>.map()</code>: Transform each element. Returns new array. (React lists)</li>
+                    <li><code>.filter()</code>: Remove elements based on condition. Returns new array.</li>
+                    <li><code>.forEach()</code>: Loop through. Returns nothing.</li>
+                    <li><code>.find()</code>: Return first matching item.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Node.js Concept</h3>
+                <p><strong>Node.js</strong> is a runtime that lets you run JavaScript on the server (outside the
+                    browser). It uses the V8 engine.</p>
+            </div>
+        </section>
+
+        <!-- WEEK 6 -->
+        <section id="week6">
+            <h2>Week 6: Backend APIs (Express.js)</h2>
+            <div class="card">
+                <h3>What is an Endpoint?</h3>
+                <p><strong>Endpoint = URL + Method</strong>. It's a "door" to your server.</p>
+                <ul>
+                    <li><code>GET</code>: Retrieve data.</li>
+                    <li><code>POST</code>: Create data.</li>
+                    <li><code>PUT/PATCH</code>: Update data.</li>
+                    <li><code>DELETE</code>: Remove data.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>HTTP Status Codes</h3>
+                <table>
+                    <tr>
+                        <th>Range</th>
+                        <th>Meaning</th>
+                        <th>Examples</th>
+                    </tr>
+                    <tr>
+                        <td>2xx</td>
+                        <td>Success</td>
+                        <td>200 OK, 201 Created</td>
+                    </tr>
+                    <tr>
+                        <td>4xx</td>
+                        <td>Client Error</td>
+                        <td>400 Bad Request, 404 Not Found</td>
+                    </tr>
+                    <tr>
+                        <td>5xx</td>
+                        <td>Server Error</td>
+                        <td>500 Internal Server Error</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <h3>Express Code Example</h3>
+                <pre>
+const express = require('express');
+const app = express();
+
+app.get('/api/users', (req, res) => {
+    res.json([{ name: 'Ali' }, { name: 'Hamad' }]);
+});
+
+app.listen(3000);
+</pre>
+            </div>
+        </section>
+
+        <!-- WEEK 7 -->
+        <section id="week7">
+            <h2>Week 7: React Basics & JS Equality</h2>
+            <div class="card">
+                <h3>Strict Equality (===) vs Loose (==)</h3>
+                <p>Always use <code>===</code> (Strict) to avoid type coercion bugs.</p>
+                <ul>
+                    <li><code>5 == "5"</code> is <strong>TRUE</strong> (Bad)</li>
+                    <li><code>5 === "5"</code> is <strong>FALSE</strong> (Good - Check Type)</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>React Concepts</h3>
+                <ul>
+                    <li><strong>JSX:</strong> HTML-like syntax inside JS.</li>
+                    <li><strong>Components:</strong> Reusable UI blocks (Functions returning JSX).</li>
+                    <li><strong>Props:</strong> Data passed <em>down</em> to components (Read-only).</li>
+                    <li><strong>State:</strong> Data managed <em>inside</em> a component (Changeable).</li>
+                </ul>
+            </div>
+        </section>
+
+
+        <!-- WEEK 9 -->
+        <section id="week9">
+            <h2>Week 9: Digital Marketing (SEO & UX)</h2>
+            <div class="card">
+                <h3>SEO (Search Engine Optimization)</h3>
+                <p>The practice of optimizing web pages to rank higher in search results.</p>
+                <ul>
+                    <li><strong>On-Page:</strong> Content, Tags, Speed.</li>
+                    <li><strong>Off-Page:</strong> Backlinks, Social signals.</li>
+                    <li><strong>Technical:</strong> Sitemap, Robots.txt, HTTPS.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>UX (User Experience)</h3>
+                <p><strong>Core Principle:</strong> Don't make the user think.</p>
+                <p><strong>Usability Heuristics:</strong> Visibility of system status, Match between system and real
+                    world, User control and freedom.</p>
+            </div>
+        </section>
+
+        <!-- WEEK 12 -->
+        <section id="week12">
+            <h2>Week 12: Case Study - CareDesk</h2>
+            <div class="card">
+                <h3>Project Overview</h3>
+                <p>A Hospital Management System built with <strong>Next.js, Supabase, and AI Assistance
+                        (Cursor/Claude)</strong>.</p>
+            </div>
+
+            <div class="card">
+                <h3>Key Learnings</h3>
+                <ul>
+                    <li><strong>AI Coding:</strong> Using prompts to generate boilerplate and complex logic.</li>
+                    <li><strong>Database:</strong> Using Supabase (PostgreSQL) for relational data.</li>
+                    <li><strong>RLS (Row Level Security):</strong> Ensuring users only see their own data.</li>
+                </ul>
+            </div>
+        </section>
+
+
+        <!-- SYSTEM DESIGN & FINAL TOPICS -->
+        <section id="system">
+            <h2>System Design & SDLC</h2>
+            <div class="card">
+                <h3>SDLC Phases (Waterfall/Agile)</h3>
+                <ol>
+                    <li><strong>Planning:</strong> Feasibility, timeline, cost.</li>
+                    <li><strong>Analysis (Requirements):</strong> Gathering what the system <em>must</em> do.</li>
+                    <li><strong>Design:</strong> Architecture, UI/UX, database schema.</li>
+                    <li><strong>Implementation (Coding):</strong> Writing the code.</li>
+                    <li><strong>Testing:</strong> Verifying it works (Unit, Integration, UAT).</li>
+                    <li><strong>Deployment:</strong> Releasing to production.</li>
+                    <li><strong>Maintenance:</strong> Updates and fixes.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="srs">
+            <h2>SRS & Requirements (IEEE 830)</h2>
+            <div class="card">
+                <h3>Functional vs. Non-Functional</h3>
+                <ul>
+                    <li><strong>Functional (FR):</strong> What the system <em>does</em>. (e.g., "User can login",
+                        "System sends email").</li>
+                    <li><strong>Non-Functional (NFR):</strong> How the system <em>performs</em> (Constraints). (e.g.,
+                        Speed, Security, Reliability).</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Characteristics of Good Requirements</h3>
+                <p><strong>Use "Shall" for mandatory reqs.</strong></p>
+                <ul>
+                    <li>Correct</li>
+                    <li>Unambiguous (Only one interpretation)</li>
+                    <li>Complete</li>
+                    <li>Consistent</li>
+                    <li>Verifiable (Testable) - "Load in 2 seconds" vs "Load fast"</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="final">
+            <h2>Final Exam Specific Topics</h2>
+            <div class="card">
+                <h3>Responsive Design</h3>
+                <p><strong>Viewport Meta Tag:</strong> Critical for mobile.
+                    <code>width=device-width, initial-scale=1.0</code></p>
+                <p><strong>Media Queries:</strong> <code>@media (max-width: 768px) { ... }</code></p>
+            </div>
+
+            <div class="card">
+                <h3>Analytics (Microsoft Clarity)</h3>
+                <ul>
+                    <li><strong>Heatmaps:</strong> Visualize where users click/scroll.</li>
+                    <li><strong>Dead Clicks:</strong> Clicking on non-interactive elements (Bad UX).</li>
+                    <li><strong>Rage Clicks:</strong> Rapidly clicking frustration.</li>
+                </ul>
+            </div>
+        </section>
+
+
+        <!-- QUESTION BANK -->
+        <section id="mcq">
+            <h2 style="color: var(--accent); text-align: center; font-size: 36px;">MASTER QUESTION BANK (200+ Items)
+            </h2>
+            <p style="text-align: center; margin-bottom: 40px;">Comprehensive practice for Final Exam. Covers all weeks.
+            </p>
+
+            <div class="mcq-container">
+                <!-- HTML & WEB BASICS -->
+                <div class="mcq-card">
+                    <div class="question-text">1. Which protocol is primarily used for fetching web pages?</div>
+                    <div class="options-grid">
+                        <div class="option">A) FTP</div>
+                        <div class="option">B) SMTP</div>
+                        <div class="option">C) HTTP</div>
+                        <div class="option">D) SSH</div>
+                    </div>
+                    <display-answer>Answer: C) HTTP</display-answer>
+                </div>
+
+                <div class="mcq-card">
+                    <div class="question-text">2. What does DOM stand for?</div>
+                    <div class="options-grid">
+                        <div class="option">A) Data Object Model</div>
+                        <div class="option">B) Document Object Model</div>
+                        <div class="option">C) Digital Ordinance Model</div>
+                        <div class="option">D) Desktop Oriented Mode</div>
+                    </div>
+                    <display-answer>Answer: B) Document Object Model</display-answer>
+                </div>
+
+                <div class="mcq-card">
+                    <div class="question-text">3. Which HTML tag is semantic?</div>
+                    <div class="options-grid">
+                        <div class="option">A) &lt;div&gt;</div>
+                        <div class="option">B) &lt;span&gt;</div>
+                        <div class="option">C) &lt;header&gt;</div>
+                        <div class="option">D) &lt;br&gt;</div>
+                    </div>
+                    <display-answer>Answer: C) &lt;header&gt;</display-answer>
+                </div>
+
+                <div class="mcq-card">
+                    <div class="question-text">4. Which is a block-level element?</div>
+                    <div class="options-grid">
+                        <div class="option">A) &lt;span&gt;</div>
+                        <div class="option">B) &lt;img&gt;</div>
+                        <div class="option">C) &lt;a&gt;</div>
+                        <div class="option">D) &lt;div&gt;</div>
+                    </div>
+                    <display-answer>Answer: D) &lt;div&gt;</display-answer>
+                </div>
+
+                <div class="mcq-card">
+                    <div class="question-text">5. The &lt;title&gt; tag belongs inside:</div>
+                    <div class="options-grid">
+                        <div class="option">A) &lt;body&gt;</div>
+                        <div class="option">B) &lt;head&gt;</div>
+                        <div class="option">C) &lt;footer&gt;</div>
+                        <div class="option">D) &lt;div&gt;</div>
+                    </div>
+                    <display-answer>Answer: B) &lt;head&gt;</display-answer>
+                </div>
+
+                <div class="mcq-card">
+                    <div class="question-text">6. CSS stands for:</div>
+                    <div class="options-grid">
+                        <div class="option">A) Creative Style Sheets</div>
+                        <div class="option">B) Cascading Style Sheets</div>
+                        <div class="option">C) Computer Style Sheets</div>
+                        <div class="option">D) Colorful Style Sheets</div>
+                    </div>
+                    <display-answer>Answer: B) Cascading Style Sheets</display-answer>
+                </div>
+
+                <div class="mcq-card">
+                    <div class="question-text">7. Which property changes text color?</div>
+                    <div class="options-grid">
+                        <div class="option">A) font-color</div>
+                        <div class="option">B) text-color</div>
+                        <div class="option">C) color</div>
+                        <div class="option">D) font-style</div>
+                    </div>
+                    <display-answer>Answer: C) color</display-answer>
+                </div>
+
+                <div class="mcq-card">
+                    <div class="question-text">8. How do you select an element with id="main"?</div>
+                    <div class="options-grid">
+                        <div class="option">A) .main</div>
+                        <div class="option">B) #main</div>
+                        <div class="option">C) main</div>
+                        <div class="option">D) *main</div>
+                    </div>
+                    <display-answer>Answer: B) #main</display-answer>
+                </div>
+
+                <div class="mcq-card">
+                    <div class="question-text">9. Flexbox is primarily 1-dimensional.</div>
+                    <div class="options-grid">
+                        <div class="option">A) True</div>
+                        <div class="option">B) False</div>
+                    </div>
+                    <display-answer>Answer: A) True</display-answer>
+                </div>
+
+                <div class="mcq-card">
+                    <div class="question-text">10. 'justify-content: center' aligns items along the:</div>
+                    <div class="options-grid">
+                        <div class="option">A) Cross Axis</div>
+                        <div class="option">B) Main Axis</div>
+                        <div class="option">C) Z Axis</div>
+                        <div class="option">D) Y Axis</div>
+                    </div>
+                    <display-answer>Answer: B) Main Axis</display-answer>
+                </div>
+
+                <!-- JAVASCRIPT & NODE -->
+                <div class="mcq-card">
+                    <div class="question-text">11. Which variable declaration is function-scoped?</div>
+                    <div class="options-grid">
+                        <div class="option">A) let</div>
+                        <div class="option">B) const</div>
+                        <div class="option">C) var</div>
+                        <div class="option">D) int</div>
+                    </div>
+                    <display-answer>Answer: C) var</display-answer>
+                </div>
+
+                <div class="mcq-card">
+                    <div class="question-text">12. What is the output of '5' == 5?</div>
+                    <div class="options-grid">
+                        <div class="option">A) true</div>
+                        <div class="option">B) false</div>
+                        <div class="option">C) undefined</div>
+                        <div class="option">D) NaN</div>
+                    </div>
+                    <display-answer>Answer: A) true</display-answer>
+                </div>
+
+                <div class="mcq-card">
+                    <div class="question-text">13. What is the output of '5' === 5?</div>
+                    <div class="options-grid">
+                        <div class="option">A) true</div>
+                        <div class="option">B) false</div>
+                    </div>
+                    <display-answer>Answer: B) false</display-answer>
+                </div>
+
+                <div class="mcq-card">
+                    <div class="question-text">14. Which method adds an item to the end of an array?</div>
+                    <div class="options-grid">
+                        <div class="option">A) pop()</div>
+                        <div class="option">B) shift()</div>
+                        <div class="option">C) push()</div>
+                        <div class="option">D) unshift()</div>
+                    </div>
+                    <display-answer>Answer: C) push()</display-answer>
+                </div>
+
+                <div class="mcq-card">
+                    <div class="question-text">15. Node.js is based on which engine?</div>
+                    <div class="options-grid">
+                        <div class="option">A) SpiderMonkey</div>
+                        <div class="option">B) V8</div>
+                        <div class="option">C) Chakra</div>
+                        <div class="option">D) WebKit</div>
+                    </div>
+                    <display-answer>Answer: B) V8</display-answer>
+                </div>
+
+                <div class="mcq-card">
+                    <div class="question-text">16. 'npm' stands for:</div>
+                    <div class="options-grid">
+                        <div class="option">A) Node Package Manager</div>
+                        <div class="option">B) New Project Maker</div>
+                        <div class="option">C) Node Process Master</div>
+                        <div class="option">D) Net Protocol Module</div>
+                    </div>
+                    <display-answer>Answer: A) Node Package Manager</display-answer>
+                </div>
+
+                <!-- BACKEND & API -->
+                <div class="mcq-card">
+                    <div class="question-text">17. Which HTTP method is for creating data?</div>
+                    <div class="options-grid">
+                        <div class="option">A) GET</div>
+                        <div class="option">B) POST</div>
+                        <div class="option">C) PUT</div>
+                        <div class="option">D) DELETE</div>
+                    </div>
+                    <display-answer>Answer: B) POST</display-answer>
+                </div>
+
+                <div class="mcq-card">
+                    <div class="question-text">18. Status code 404 means:</div>
+                    <div class="options-grid">
+                        <div class="option">A) OK</div>
+                        <div class="option">B) Server Error</div>
+                        <div class="option">C) Not Found</div>
+                        <div class="option">D) Forbidden</div>
+                    </div>
+                    <display-answer>Answer: C) Not Found</display-answer>
+                </div>
+
+                <div class="mcq-card">
+                    <div class="question-text">19. Status code 500 means:</div>
+                    <div class="options-grid">
+                        <div class="option">A) Created</div>
+                        <div class="option">B) Bad Request</div>
+                        <div class="option">C) Internal Server Error</div>
+                        <div class="option">D) Authorized</div>
+                    </div>
+                    <display-answer>Answer: C) Internal Server Error</display-answer>
+                </div>
+
+                <div class="mcq-card">
+                    <div class="question-text">20. In Express, how do you access URL parameters?</div>
+                    <div class="options-grid">
+                        <div class="option">A) req.body</div>
+                        <div class="option">B) req.params</div>
+                        <div class="option">C) req.query</div>
+                        <div class="option">D) req.url</div>
+                    </div>
+                    <display-answer>Answer: B) req.params</display-answer>
+                </div>
+
+                <!-- SDLC & SRS -->
+                <div class="mcq-card">
+                    <div class="question-text">21. Which is the first phase of SDLC?</div>
+                    <div class="options-grid">
+                        <div class="option">A) Design</div>
+                        <div class="option">B) Testing</div>
+                        <div class="option">C) Planning</div>
+                        <div class="option">D) Maintenance</div>
+                    </div>
+                    <display-answer>Answer: C) Planning</display-answer>
+                </div>
+
+                <div class="mcq-card">
+                    <div class="question-text">22. "System shall load in 2s" is a:</div>
+                    <div class="options-grid">
+                        <div class="option">A) Functional Requirement</div>
+                        <div class="option">B) Non-Functional Requirement</div>
+                        <div class="option">C) User Story</div>
+                        <div class="option">D) Bug</div>
+                    </div>
+                    <display-answer>Answer: B) Non-Functional Requirement</display-answer>
+                </div>
+
+                <div class="mcq-card">
+                    <div class="question-text">23. Which word signifies a mandatory requirement in IEEE 830?</div>
+                    <div class="options-grid">
+                        <div class="option">A) Should</div>
+                        <div class="option">B) May</div>
+                        <div class="option">C) Shall</div>
+                        <div class="option">D) Can</div>
+                    </div>
+                    <display-answer>Answer: C) Shall</display-answer>
+                </div>
+
+                <div class="mcq-card">
+                    <div class="question-text">24. What does SRS stand for?</div>
+                    <div class="options-grid">
+                        <div class="option">A) System Response Speed</div>
+                        <div class="option">B) Software Requirements Specification</div>
+                        <div class="option">C) Server Request Standard</div>
+                        <div class="option">D) Simple React System</div>
+                    </div>
+                    <display-answer>Answer: B) Software Requirements Specification</display-answer>
+                </div>
+
+                <div class="mcq-card">
+                    <div class="question-text">25. Cost of fixing a bug is highest in which phase?</div>
+                    <div class="options-grid">
+                        <div class="option">A) Requirements</div>
+                        <div class="option">B) Design</div>
+                        <div class="option">C) Coding</div>
+                        <div class="option">D) Maintenance</div>
+                    </div>
+                    <display-answer>Answer: D) Maintenance</display-answer>
+                </div>
+
+                <!-- MORE GENERAL QUESTIONS (Batch 2) -->
+                <div class="mcq-card">
+                    <div class="question-text">26. Which tag is used for an ordered list?</div>
+                    <div class="options-grid">
+                        <div class="option">ul</div>
+                        <div class="option">ol</div>
+                        <div class="option">li</div>
+                        <div class="option">dl</div>
+                    </div><display-answer>Answer: ol</display-answer>
+                </div>
+                <div class="mcq-card">
+                    <div class="question-text">27. Which tag is used for an unordered list?</div>
+                    <div class="options-grid">
+                        <div class="option">ul</div>
+                        <div class="option">ol</div>
+                        <div class="option">li</div>
+                        <div class="option">dl</div>
+                    </div><display-answer>Answer: ul</display-answer>
+                </div>
+                <div class="mcq-card">
+                    <div class="question-text">28. Default flex-direction is?</div>
+                    <div class="options-grid">
+                        <div class="option">row</div>
+                        <div class="option">column</div>
+                        <div class="option">row-reverse</div>
+                        <div class="option">column-reverse</div>
+                    </div><display-answer>Answer: row</display-answer>
+                </div>
+                <div class="mcq-card">
+                    <div class="question-text">29. Correct way to link external CSS?</div>
+                    <div class="options-grid">
+                        <div class="option">&lt;link rel="stylesheet" href="..."&gt;</div>
+                        <div class="option">&lt;style src="..."&gt;</div>
+                    </div><display-answer>Answer: &lt;link rel="stylesheet" href="..."&gt;</display-answer>
+                </div>
+                <div class="mcq-card">
+                    <div class="question-text">30. React hooks must be called at the top level?</div>
+                    <div class="options-grid">
+                        <div class="option">True</div>
+                        <div class="option">False</div>
+                    </div><display-answer>Answer: True</display-answer>
+                </div>
+
+                <div class="mcq-card">
+                    <div class="question-text">31. 'useEffect' runs after render?</div>
+                    <div class="options-grid">
+                        <div class="option">True</div>
+                        <div class="option">False</div>
+                    </div><display-answer>Answer: True</display-answer>
+                </div>
+                <div class="mcq-card">
+                    <div class="question-text">32. Which tool is used for heatmaps?</div>
+                    <div class="options-grid">
+                        <div class="option">Google Analytics</div>
+                        <div class="option">Microsoft Clarity</div>
+                    </div><display-answer>Answer: Microsoft Clarity</display-answer>
+                </div>
+                <div class="mcq-card">
+                    <div class="question-text">33. 'Dead clicks' indicate?</div>
+                    <div class="options-grid">
+                        <div class="option">User found info</div>
+                        <div class="option">User clicked non-interactive element</div>
+                    </div><display-answer>Answer: User clicked non-interactive element</display-answer>
+                </div>
+                <div class="mcq-card">
+                    <div class="question-text">34. 401 Unauthorized vs 403 Forbidden?</div>
+                    <div class="options-grid">
+                        <div class="option">401=No Login, 403=Login but no permission</div>
+                        <div class="option">Same thing</div>
+                    </div><display-answer>Answer: 401=No Login, 403=Login but no permission</display-answer>
+                </div>
+                <div class="mcq-card">
+                    <div class="question-text">35. Which is NOT a valid HTTP method?</div>
+                    <div class="options-grid">
+                        <div class="option">GET</div>
+                        <div class="option">SEND</div>
+                        <div class="option">POST</div>
+                        <div class="option">DELETE</div>
+                    </div><display-answer>Answer: SEND</display-answer>
+                </div>
+
+
+            <!-- INSERTING FULL QUESTION SET (Questions 36-200+) -->
+            
+            <!-- BATCH 2: HTML & CSS DEEP DIVE -->
+            <div class="mcq-card"><div class="question-text">36. Which CSS unit is relative to the font-size of the root element?</div><div class="options-grid"><div class="option">em</div><div class="option">rem</div><div class="option">px</div><div class="option">%</div></div><display-answer>Answer: rem</display-answer></div>
+            <div class="mcq-card"><div class="question-text">37. Which position value removes an element from the normal document flow?</div><div class="options-grid"><div class="option">relative</div><div class="option">static</div><div class="option">absolute</div><div class="option">sticky</div></div><display-answer>Answer: absolute</display-answer></div>
+            <div class="mcq-card"><div class="question-text">38. In Flexbox, which property handles wrapping items to next line?</div><div class="options-grid"><div class="option">flex-wrap</div><div class="option">flex-flow</div><div class="option">flex-direction</div><div class="option">wrap-items</div></div><display-answer>Answer: flex-wrap</display-answer></div>
+            <div class="mcq-card"><div class="question-text">39. The default value of 'position' property is:</div><div class="options-grid"><div class="option">relative</div><div class="option">absolute</div><div class="option">fixed</div><div class="option">static</div></div><display-answer>Answer: static</display-answer></div>
+            <div class="mcq-card"><div class="question-text">40. Which meta tag attribute controls the viewport width?</div><div class="options-grid"><div class="option">content="width=device-width"</div><div class="option">name="width=screen-width"</div><div class="option">content="scale=1"</div></div><display-answer>Answer: content="width=device-width"</display-answer></div>
+            <div class="mcq-card"><div class="question-text">41. 'z-index' only works on positioned elements (non-static).</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</display-answer></div>
+            <div class="mcq-card"><div class="question-text">42. Specificity hierarchy (lowest to highest):</div><div class="options-grid"><div class="option">Type &lt; Class &lt; ID &lt; Inline</div><div class="option">Class &lt; Type &lt; ID &lt; Inline</div><div class="option">Inline &lt; ID &lt; Class &lt; Type</div></div><display-answer>Answer: Type &lt; Class &lt; ID &lt; Inline</display-answer></div>
+            <div class="mcq-card"><div class="question-text">43. Which pseudo-class selects the first child?</div><div class="options-grid"><div class="option">:first-child</div><div class="option">:child-1</div><div class="option">:nth-child(0)</div></div><display-answer>Answer: :first-child</display-answer></div>
+            <div class="mcq-card"><div class="question-text">44. Which pseudo-element creates content before an element?</div><div class="options-grid"><div class="option">::before</div><div class="option">::after</div><div class="option">::prepend</div></div><display-answer>Answer: ::before</display-answer></div>
+            <div class="mcq-card"><div class="question-text">45. CSS Grid property to define columns?</div><div class="options-grid"><div class="option">grid-template-columns</div><div class="option">grid-columns</div><div class="option">grid-template-rows</div></div><display-answer>Answer: grid-template-columns</display-answer></div>
+
+            <!-- BATCH 3: JAVASCRIPT ES6+ -->
+            <div class="mcq-card"><div class="question-text">46. Correct syntax for Arrow Function?</div><div class="options-grid"><div class="option">() => {}</div><div class="option">() -> {}</div><div class="option">function() {}</div></div><display-answer>Answer: () => {}</display-answer></div>
+            <div class="mcq-card"><div class="question-text">47. Which method creates a new array with results of calling a function on every element?</div><div class="options-grid"><div class="option">forEach</div><div class="option">map</div><div class="option">filter</div><div class="option">reduce</div></div><display-answer>Answer: map</display-answer></div>
+            <div class="mcq-card"><div class="question-text">48. Which operator spreads array elements?</div><div class="options-grid"><div class="option">...</div><div class="option">::</div><div class="option">=&gt;</div></div><display-answer>Answer: ... (Spread Operator)</display-answer></div>
+            <div class="mcq-card"><div class="question-text">49. How to handle async operations in modern JS?</div><div class="options-grid"><div class="option">async/await</div><div class="option">callbacks only</div><div class="option">synchronous functions</div></div><display-answer>Answer: async/await</display-answer></div>
+            <div class="mcq-card"><div class="question-text">50. 'Promise' states are:</div><div class="options-grid"><div class="option">Pending, Fulfilled, Rejected</div><div class="option">Start, Middle, End</div><div class="option">Loading, Success, Error</div></div><display-answer>Answer: Pending, Fulfilled, Rejected</display-answer></div>
+            <div class="mcq-card"><div class="question-text">51. Destructuring assignment allows unpacking values from arrays/objects.</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</display-answer></div>
+            <div class="mcq-card"><div class="question-text">52. Template Literal syntax uses:</div><div class="options-grid"><div class="option">Backticks (`)</div><div class="option">Single Quotes (')</div><div class="option">Double Quotes (")</div></div><display-answer>Answer: Backticks (`)</display-answer></div>
+            <div class="mcq-card"><div class="question-text">53. 'this' keyword in arrow functions refers to:</div><div class="options-grid"><div class="option">Lexical scope (surrounding context)</div><div class="option">Global object</div><div class="option">The function itself</div></div><display-answer>Answer: Lexical scope</display-answer></div>
+            <div class="mcq-card"><div class="question-text">54. Which method converts Object to JSON string?</div><div class="options-grid"><div class="option">JSON.stringify()</div><div class="option">JSON.parse()</div><div class="option">JSON.toString()</div></div><display-answer>Answer: JSON.stringify()</display-answer></div>
+            <div class="mcq-card"><div class="question-text">55. Which event occurs when user clicks an element?</div><div class="options-grid"><div class="option">onclick</div><div class="option">onhover</div><div class="option">onchange</div></div><display-answer>Answer: onclick</display-answer></div>
+
+            <!-- BATCH 4: BACKEND & NODE.JS -->
+            <div class="mcq-card"><div class="question-text">56. Express.js is a framework for:</div><div class="options-grid"><div class="option">Node.js</div><div class="option">React</div><div class="option">Python</div></div><display-answer>Answer: Node.js</display-answer></div>
+            <div class="mcq-card"><div class="question-text">57. Middleware functions have access to:</div><div class="options-grid"><div class="option">req, res, next</div><div class="option">only req</div><div class="option">only res</div></div><display-answer>Answer: req, res, next</display-answer></div>
+            <div class="mcq-card"><div class="question-text">58. Which method parses incoming JSON requests in Express?</div><div class="options-grid"><div class="option">express.json()</div><div class="option">express.parse()</div><div class="option">body-parser</div></div><display-answer>Answer: express.json()</display-answer></div>
+            <div class="mcq-card"><div class="question-text">59. REST stands for:</div><div class="options-grid"><div class="option">Representational State Transfer</div><div class="option">Remote Server Transfer</div></div><display-answer>Answer: Representational State Transfer</display-answer></div>
+            <div class="mcq-card"><div class="question-text">60. Node.js uses Non-blocking I/O.</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</display-answer></div>
+            <div class="mcq-card"><div class="question-text">61. 'module.exports' is used to:</div><div class="options-grid"><div class="option">Export functions/objects from a file</div><div class="option">Import modules</div></div><display-answer>Answer: Export functions/objects from a file</display-answer></div>
+            <div class="mcq-card"><div class="question-text">62. Which file contains project metadata and dependencies?</div><div class="options-grid"><div class="option">package.json</div><div class="option">node_modules</div><div class="option">index.js</div></div><display-answer>Answer: package.json</display-answer></div>
+            <div class="mcq-card"><div class="question-text">63. How to install a package named 'axios'?</div><div class="options-grid"><div class="option">npm install axios</div><div class="option">node install axios</div><div class="option">npm get axios</div></div><display-answer>Answer: npm install axios</display-answer></div>
+            <div class="mcq-card"><div class="question-text">64. Which status code indicates 'Unauthorized'?</div><div class="options-grid"><div class="option">401</div><div class="option">403</div><div class="option">404</div></div><display-answer>Answer: 401</display-answer></div>
+            <div class="mcq-card"><div class="question-text">65. Which status code indicates 'Created'?</div><div class="options-grid"><div class="option">201</div><div class="option">200</div><div class="option">204</div></div><display-answer>Answer: 201</display-answer></div>
+
+            <!-- BATCH 5: REACT -->
+            <div class="mcq-card"><div class="question-text">66. Correct way to update state in functional component?</div><div class="options-grid"><div class="option">setCount(count + 1)</div><div class="option">count = count + 1</div></div><display-answer>Answer: setCount(count + 1)</display-answer></div>
+            <div class="mcq-card"><div class="question-text">67. useState returns:</div><div class="options-grid"><div class="option">Array with [value, setter]</div><div class="option">Object with {value, setter}</div></div><display-answer>Answer: Array with [value, setter]</display-answer></div>
+            <div class="mcq-card"><div class="question-text">68. useEffect(() => {}, []) runs:</div><div class="options-grid"><div class="option">Only on Mount</div><div class="option">Every Render</div><div class="option">On Unmount</div></div><display-answer>Answer: Only on Mount</display-answer></div>
+            <div class="mcq-card"><div class="question-text">69. Props are immutable (read-only).</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</display-answer></div>
+            <div class="mcq-card"><div class="question-text">70. What is the Virtual DOM?</div><div class="options-grid"><div class="option">Lightweight copy of actual DOM</div><div class="option">A video game</div><div class="option">Browser engine</div></div><display-answer>Answer: Lightweight copy of actual DOM</display-answer></div>
+            <div class="mcq-card"><div class="question-text">71. JSX requires a single parent element.</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</display-answer></div>
+            <div class="mcq-card"><div class="question-text">72. How to conditionally render?</div><div class="options-grid"><div class="option">{condition && &lt;Component /&gt;}</div><div class="option">if(condition) &lt;Component /&gt;</div></div><display-answer>Answer: {condition && &lt;Component /&gt;}</display-answer></div>
+            <div class="mcq-card"><div class="question-text">73. Which hook handles side effects?</div><div class="options-grid"><div class="option">useEffect</div><div class="option">useState</div><div class="option">useContext</div></div><display-answer>Answer: useEffect</display-answer></div>
+            <div class="mcq-card"><div class="question-text">74. Use 'className' instead of 'class' in JSX.</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</display-answer></div>
+            <div class="mcq-card"><div class="question-text">75. Keys in lists must be:</div><div class="options-grid"><div class="option">Unique among siblings</div><div class="option">Globally unique</div><div class="option">Random numbers</div></div><display-answer>Answer: Unique among siblings</display-answer></div>
+
+            <!-- BATCH 6: FINAL EXAM SPECIFIC REINFORCEMENT -->
+            <div class="mcq-card"><div class="question-text">76. SDLC: Testing phase ensures:</div><div class="options-grid"><div class="option">System meets requirements</div><div class="option">System looks good</div></div><display-answer>Answer: System meets requirements</display-answer></div>
+            <div class="mcq-card"><div class="question-text">77. Requirement: "Secure login" is:</div><div class="options-grid"><div class="option">Vague (Bad)</div><div class="option">Specific (Good)</div></div><display-answer>Answer: Vague (Bad) - needs measurable criteria</div></div>
+            <div class="mcq-card"><div class="question-text">78. "System shall support 1000 users" is:</div><div class="options-grid"><div class="option">Non-Functional</div><div class="option">Functional</div></div><display-answer>Answer: Non-Functional (Scalability)</div></div>
+            <div class="mcq-card"><div class="question-text">79. Microsoft Clarity 'Scroll Heatmap' shows:</div><div class="options-grid"><div class="option">How far users scroll</div><div class="option">Where users move mouse</div></div><display-answer>Answer: How far users scroll</display-answer></div>
+            <div class="mcq-card"><div class="question-text">80. What is 'Responsive Web Design'?</div><div class="options-grid"><div class="option">Design adapting to screen size</div><div class="option">Design that loads fast</div></div><display-answer>Answer: Design adapting to screen size</display-answer></div>
+
+            <!-- BATCH 7: HTML TAGS & ATTRIBUTES -->
+            <div class="mcq-card"><div class="question-text">81. &lt;a href="url"&gt; creates a link.</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</display-answer></div>
+            <div class="mcq-card"><div class="question-text">82. &lt;img src="image.jpg" alt="description"&gt; 'alt' is for:</div><div class="options-grid"><div class="option">Accessibility (Screen Readers)</div><div class="option">Tooltip</div></div><display-answer>Answer: Accessibility</div></div>
+            <div class="mcq-card"><div class="question-text">83. Which input type is for emails?</div><div class="options-grid"><div class="option">type="email"</div><div class="option">type="text"</div></div><display-answer>Answer: type="email"</display-answer></div>
+            <div class="mcq-card"><div class="question-text">84. Which tag makes text bold usually?</div><div class="options-grid"><div class="option">&lt;strong&gt;</div><div class="option">&lt;bold&gt;</div></div><display-answer>Answer: &lt;strong&gt;</display-answer></div>
+            <div class="mcq-card"><div class="question-text">85. &lt;ul&gt; creates bullets?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</display-answer></div>
+            <div class="mcq-card"><div class="question-text">86. &lt;ol&gt; creates numbers?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</display-answer></div>
+            <div class="mcq-card"><div class="question-text">87. &lt;form&gt; attribute 'action' defines:</div><div class="options-grid"><div class="option">URL to send data</div><div class="option">Method to use</div></div><display-answer>Answer: URL to send data</display-answer></div>
+            <div class="mcq-card"><div class="question-text">88. &lt;label&gt; 'for' attribute matches input's:</div><div class="options-grid"><div class="option">id</div><div class="option">name</div></div><display-answer>Answer: id</display-answer></div>
+            <div class="mcq-card"><div class="question-text">89. &lt;textarea&gt; is for multi-line text.</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</display-answer></div>
+            <div class="mcq-card"><div class="question-text">90. &lt;button&gt; default type inside form is:</div><div class="options-grid"><div class="option">submit</div><div class="option">button</div></div><display-answer>Answer: submit</display-answer></div>
+
+            <!-- BATCH 8: CSS ADVANCED -->
+            <div class="mcq-card"><div class="question-text">91. 'vh' unit stands for:</div><div class="options-grid"><div class="option">Viewport Height</div><div class="option">Vertical Height</div></div><display-answer>Answer: Viewport Height</display-answer></div>
+            <div class="mcq-card"><div class="question-text">92. 'calc(100% - 20px)' is valid CSS?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</display-answer></div>
+            <div class="mcq-card"><div class="question-text">93. 'display: none' removes element from layout?</div><div class="options-grid"><div class="option">True</div><div class="option">False (just hides)</div></div><display-answer>Answer: True</display-answer></div>
+            <div class="mcq-card"><div class="question-text">94. 'visibility: hidden' removes element from layout?</div><div class="options-grid"><div class="option">False (keeps space)</div><div class="option">True</div></div><display-answer>Answer: False (keeps space)</display-answer></div>
+            <div class="mcq-card"><div class="question-text">95. 'opacity: 0' makes element transparent?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</display-answer></div>
+            <div class="mcq-card"><div class="question-text">96. CSS 'transform: rotate(45deg)' does what?</div><div class="options-grid"><div class="option">Rotates element</div><div class="option">Moves element</div></div><display-answer>Answer: Rotates element</display-answer></div>
+            <div class="mcq-card"><div class="question-text">97. 'transition' property allows smooth changes?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</display-answer></div>
+            <div class="mcq-card"><div class="question-text">98. '@keyframes' rule is used for:</div><div class="options-grid"><div class="option">Animations</div><div class="option">Transitions</div></div><display-answer>Answer: Animations</display-answer></div>
+            <div class="mcq-card"><div class="question-text">99. 'media="print"' in link tag targets printers?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</display-answer></div>
+            <div class="mcq-card"><div class="question-text">100. '!important' overrides specificity?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</display-answer></div>
+            
+            <!-- BATCH 9: MORE JS & PROGRAMMING -->
+            <div class="mcq-card"><div class="question-text">101. 'NaN' type is:</div><div class="options-grid"><div class="option">Number</div><div class="option">String</div></div><display-answer>Answer: Number</div></div>
+            <div class="mcq-card"><div class="question-text">102. 'null' vs 'undefined'?</div><div class="options-grid"><div class="option">null is object, undefined is type</div><div class="option">same</div></div><display-answer>Answer: null is object, undefined is type</div></div>
+            <div class="mcq-card"><div class="question-text">103. 'window' object represents?</div><div class="options-grid"><div class="option">Browser window</div><div class="option">Document</div></div><display-answer>Answer: Browser window</div></div>
+            <div class="mcq-card"><div class="question-text">104. 'document.getElementById()' returns?</div><div class="options-grid"><div class="option">Element object</div><div class="option">Array</div></div><display-answer>Answer: Element object</div></div>
+            <div class="mcq-card"><div class="question-text">105. 'localStorage' persists after browser close?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">106. 'sessionStorage' clears when tab closed?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">107. Callback function is passed as argument?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">108. 'try...catch' handles errors?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">109. 'fetch()' returns a Promise?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">110. 'res.send()' vs 'res.json()'?</div><div class="options-grid"><div class="option">json sets header to app/json</div><div class="option">no difference</div></div><display-answer>Answer: json sets header to app/json</div></div>
+
+            <!-- BATCH 10: CARE DESK, SEO, UX -->
+            <div class="mcq-card"><div class="question-text">111. SEO: 'Robots.txt' file usage?</div><div class="options-grid"><div class="option">Tell crawlers what to index</div><div class="option">Style the page</div></div><display-answer>Answer: Tell crawlers what to index</div></div>
+            <div class="mcq-card"><div class="question-text">112. SEO: 'Sitemap.xml' usage?</div><div class="options-grid"><div class="option">List all URLS for engines</div><div class="option">List images</div></div><display-answer>Answer: List all URLS for engines</div></div>
+            <div class="mcq-card"><div class="question-text">113. UX: 'Breadcrumbs' are for?</div><div class="options-grid"><div class="option">Navigation trail</div><div class="option">Feeding birds</div></div><display-answer>Answer: Navigation trail</div></div>
+            <div class="mcq-card"><div class="question-text">114. UX: 'Call to Action' (CTA) example?</div><div class="options-grid"><div class="option">"Sign Up Now" button</div><div class="option">Footer text</div></div><display-answer>Answer: "Sign Up Now" button</div></div>
+            <div class="mcq-card"><div class="question-text">115. CareDesk: Patient Registration requires?</div><div class="options-grid"><div class="option">Name, Email, Phone</div><div class="option">Only Name</div></div><display-answer>Answer: Name, Email, Phone</div></div>
+            <div class="mcq-card"><div class="question-text">116. CareDesk: Admin can book for others?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">117. CareDesk: DB used?</div><div class="options-grid"><div class="option">Supabase</div><div class="option">MySQL</div></div><display-answer>Answer: Supabase</div></div>
+            <div class="mcq-card"><div class="question-text">118. RLS policy 'authenticated' means?</div><div class="options-grid"><div class="option">Logged in users only</div><div class="option">Anyone</div></div><display-answer>Answer: Logged in users only</div></div>
+            <div class="mcq-card"><div class="question-text">119. Next.js is a React framework?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">120. TailwindCSS is?</div><div class="options-grid"><div class="option">Utility-first CSS framework</div><div class="option">Component library</div></div><display-answer>Answer: Utility-first CSS framework</div></div>
+
+            <!-- BATCH 11: MISC & FINAL PREP RE-CHECKS -->
+            <div class="mcq-card"><div class="question-text">121. What is 'Git'?</div><div class="options-grid"><div class="option">Version Control System</div><div class="option">Social Network</div></div><display-answer>Answer: Version Control System</div></div>
+            <div class="mcq-card"><div class="question-text">122. 'git init' does what?</div><div class="options-grid"><div class="option">Initialize repo</div><div class="option">Commit changes</div></div><display-answer>Answer: Initialize repo</div></div>
+            <div class="mcq-card"><div class="question-text">123. 'git commit -m' usage?</div><div class="options-grid"><div class="option">Save changes with message</div><div class="option">Upload changes</div></div><display-answer>Answer: Save changes with message</div></div>
+            <div class="mcq-card"><div class="question-text">124. 'git push' usage?</div><div class="options-grid"><div class="option">Upload to remote</div><div class="option">Save locally</div></div><display-answer>Answer: Upload to remote</div></div>
+            <div class="mcq-card"><div class="question-text">125. HTTP is stateless?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">126. Cookies vs LocalStorage size?</div><div class="options-grid"><div class="option">Cookies ~4KB, LocalStorage ~5MB</div><div class="option">Same</div></div><display-answer>Answer: Cookies ~4KB, LocalStorage ~5MB</div></div>
+            <div class="mcq-card"><div class="question-text">127. JSON only supports double quotes.</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">128. 'defer' attribute in script tag?</div><div class="options-grid"><div class="option">Run after HTML parsing</div><div class="option">Run immediate</div></div><display-answer>Answer: Run after HTML parsing</div></div>
+            <div class="mcq-card"><div class="question-text">129. How to select all P elements in CSS?</div><div class="options-grid"><div class="option">p { }</div><div class="option">.p { }</div></div><display-answer>Answer: p { }</div></div>
+            <div class="mcq-card"><div class="question-text">130. How to include JS file?</div><div class="options-grid"><div class="option">&lt;script src="..."&gt;</div><div class="option">&lt;js file="..."&gt;</div></div><display-answer>Answer: &lt;script src="..."&gt;</div></div>
+
+            <!-- BATCH 12: EVEN MORE QUESTIONS -->
+            <div class="mcq-card"><div class="question-text">131. Which is semantic? &lt;aside&gt;</div><div class="options-grid"><div class="option">Yes</div><div class="option">No</div></div><display-answer>Answer: Yes</div></div>
+            <div class="mcq-card"><div class="question-text">132. Which is semantic? &lt;form&gt;</div><div class="options-grid"><div class="option">Yes</div><div class="option">No</div></div><display-answer>Answer: Yes</div></div>
+            <div class="mcq-card"><div class="question-text">133. Which is semantic? &lt;span&gt;</div><div class="options-grid"><div class="option">No</div><div class="option">Yes</div></div><display-answer>Answer: No</div></div>
+            <div class="mcq-card"><div class="question-text">134. Which input type for password?</div><div class="options-grid"><div class="option">type="password"</div><div class="option">type="hidden"</div></div><display-answer>Answer: type="password"</div></div>
+            <div class="mcq-card"><div class="question-text">135. Which attribute opens link in new tab?</div><div class="options-grid"><div class="option">target="_blank"</div><div class="option">target="new"</div></div><display-answer>Answer: target="_blank"</div></div>
+            <div class="mcq-card"><div class="question-text">136. CSS specificity: ID vs Class?</div><div class="options-grid"><div class="option">ID > Class</div><div class="option">Class > ID</div></div><display-answer>Answer: ID > Class</div></div>
+            <div class="mcq-card"><div class="question-text">137. 100vh = 100% of viewport height?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">138. 'align-self' overrides 'align-items'?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">139. 'order' property changes visual order?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">140. 'flex-grow: 1' means?</div><div class="options-grid"><div class="option">Take available space</div><div class="option">Shrink</div></div><display-answer>Answer: Take available space</div></div>
+
+            <!-- BATCH 13: ADVANCED JS & REACT -->
+            <div class="mcq-card"><div class="question-text">141. 'typeof []' returns?</div><div class="options-grid"><div class="option">'object'</div><div class="option">'array'</div></div><display-answer>Answer: 'object'</div></div>
+            <div class="mcq-card"><div class="question-text">142. 'NaN === NaN' is?</div><div class="options-grid"><div class="option">false</div><div class="option">true</div></div><display-answer>Answer: false</div></div>
+            <div class="mcq-card"><div class="question-text">143. Closures have access to outer function scope?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</display-answer></div>
+            <div class="mcq-card"><div class="question-text">144. 'const' arrays can be mutated?</div><div class="options-grid"><div class="option">True (contents/elements)</div><div class="option">False</div></div><display-answer>Answer: True (contents/elements)</div></div>
+            <div class="mcq-card"><div class="question-text">145. Event bubbling goes from?</div><div class="options-grid"><div class="option">Target up to Window</div><div class="option">Window down to Target</div></div><display-answer>Answer: Target up to Window</div></div>
+            <div class="mcq-card"><div class="question-text">146. 'preventDefault()' does what?</div><div class="options-grid"><div class="option">Stops default browser action</div><div class="option">Stops bubbling</div></div><display-answer>Answer: Stops default browser action</div></div>
+            <div class="mcq-card"><div class="question-text">147. React 'props.children' is?</div><div class="options-grid"><div class="option">Content inside component tag</div><div class="option">Child components</div></div><display-answer>Answer: Content inside component tag</div></div>
+            <div class="mcq-card"><div class="question-text">148. Can you return multiple elements in JSX without wrapper?</div><div class="options-grid"><div class="option">No, use Fragment &lt;&gt;&lt;/&gt;</div><div class="option">Yes</div></div><display-answer>Answer: No, use Fragment &lt;&gt;&lt;/&gt;</div></div>
+            <div class="mcq-card"><div class="question-text">149. 'useRef' causes re-render?</div><div class="options-grid"><div class="option">False</div><div class="option">True</div></div><display-answer>Answer: False</div></div>
+            <div class="mcq-card"><div class="question-text">150. Redux is for?</div><div class="options-grid"><div class="option">State Management</div><div class="option">Styling</div></div><display-answer>Answer: State Management</div></div>
+
+            <!-- BATCH 14: RANDOM DRILLS -->
+            <div class="mcq-card"><div class="question-text">151. 1 byte = ? bits</div><div class="options-grid"><div class="option">8</div><div class="option">4</div></div><display-answer>Answer: 8</div></div>
+            <div class="mcq-card"><div class="question-text">152. IP address identifies?</div><div class="options-grid"><div class="option">Device on network</div><div class="option">User name</div></div><display-answer>Answer: Device on network</div></div>
+            <div class="mcq-card"><div class="question-text">153. DNS translates?</div><div class="options-grid"><div class="option">Domain name to IP</div><div class="option">IP to MAC</div></div><display-answer>Answer: Domain name to IP</div></div>
+            <div class="mcq-card"><div class="question-text">154. localhost IP is?</div><div class="options-grid"><div class="option">127.0.0.1</div><div class="option">192.168.0.1</div></div><display-answer>Answer: 127.0.0.1</div></div>
+            <div class="mcq-card"><div class="question-text">155. Port 80 is for?</div><div class="options-grid"><div class="option">HTTP</div><div class="option">HTTPS</div></div><display-answer>Answer: HTTP</div></div>
+            <div class="mcq-card"><div class="question-text">156. Port 443 is for?</div><div class="options-grid"><div class="option">HTTPS</div><div class="option">FTP</div></div><display-answer>Answer: HTTPS</div></div>
+            <div class="mcq-card"><div class="question-text">157. SQL is for?</div><div class="options-grid"><div class="option">Relational Databases</div><div class="option">NoSQL</div></div><display-answer>Answer: Relational Databases</div></div>
+            <div class="mcq-card"><div class="question-text">158. NoSQL example?</div><div class="options-grid"><div class="option">MongoDB</div><div class="option">MySQL</div></div><display-answer>Answer: MongoDB</div></div>
+            <div class="mcq-card"><div class="question-text">159. 'Git merge' joins branches?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">160. 'npm start' usually runs?</div><div class="options-grid"><div class="option">Start script in package.json</div><div class="option">Updates node</div></div><display-answer>Answer: Start script in package.json</div></div>
+
+            <!-- BATCH 15: FINAL STRETCH (161-200) -->
+            <div class="mcq-card"><div class="question-text">161. Agile vs Waterfall: Which is iterative?</div><div class="options-grid"><div class="option">Agile</div><div class="option">Waterfall</div></div><display-answer>Answer: Agile</div></div>
+            <div class="mcq-card"><div class="question-text">162. Waterfall is linear?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">163. User Stories format?</div><div class="options-grid"><div class="option">As a [role], I want [goal], so that [benefit]</div><div class="option">I need [feature]</div></div><display-answer>Answer: As a [role], I want [goal], so that [benefit]</div></div>
+            <div class="mcq-card"><div class="question-text">164. Acceptance Criteria defines?</div><div class="options-grid"><div class="option">Conditions for story completion</div><div class="option">Who accepts the story</div></div><display-answer>Answer: Conditions for story completion</div></div>
+            <div class="mcq-card"><div class="question-text">165. MVP stands for?</div><div class="options-grid"><div class="option">Minimum Viable Product</div><div class="option">Most Valuable Player</div></div><display-answer>Answer: Minimum Viable Product</div></div>
+            <div class="mcq-card"><div class="question-text">166. 'border-radius' makes corners round?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">167. 'cursor: pointer' shows hand icon?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">168. 'overflow: hidden' clips content?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">169. 'box-shadow' adds shadow?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">170. 'Date.now()' returns?</div><div class="options-grid"><div class="option">Timestamp (ms since epoch)</div><div class="option">Current formatted date</div></div><display-answer>Answer: Timestamp (ms since epoch)</div></div>
+            <div class="mcq-card"><div class="question-text">171. 'Math.random()' returns?</div><div class="options-grid"><div class="option">0 to 1 (exclusive)</div><div class="option">1 to 100</div></div><display-answer>Answer: 0 to 1 (exclusive)</div></div>
+            <div class="mcq-card"><div class="question-text">172. 'Math.floor()' rounds down?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">173. 'Math.ceil()' rounds up?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">174. 'parseInt()' converts string to integer?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">175. 'parseFloat()' preserves decimals?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">176. 'String.length' property?</div><div class="options-grid"><div class="option">Number of characters</div><div class="option">Size in bytes</div></div><display-answer>Answer: Number of characters</div></div>
+            <div class="mcq-card"><div class="question-text">177. 'String.toUpperCase()' method?</div><div class="options-grid"><div class="option">Converts to upper case</div><div class="option">Checks if upper case</div></div><display-answer>Answer: Converts to upper case</div></div>
+            <div class="mcq-card"><div class="question-text">178. 'Array.length' property?</div><div class="options-grid"><div class="option">Number of items</div><div class="option">Max capacity</div></div><display-answer>Answer: Number of items</div></div>
+            <div class="mcq-card"><div class="question-text">179. 'Array.isArray()' checks type?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">180. 'Object.keys()' returns?</div><div class="options-grid"><div class="option">Array of keys</div><div class="option">Array of values</div></div><display-answer>Answer: Array of keys</div></div>
+            <div class="mcq-card"><div class="question-text">181. 'Object.values()' returns?</div><div class="options-grid"><div class="option">Array of values</div><div class="option">Array of keys</div></div><display-answer>Answer: Array of values</div></div>
+            <div class="mcq-card"><div class="question-text">182. 'continue' statement in loop?</div><div class="options-grid"><div class="option">Skips current iteration</div><div class="option">Stops loop</div></div><display-answer>Answer: Skips current iteration</div></div>
+            <div class="mcq-card"><div class="question-text">183. 'break' statement in loop?</div><div class="options-grid"><div class="option">Exits loop</div><div class="option">Pauses loop</div></div><display-answer>Answer: Exits loop</div></div>
+            <div class="mcq-card"><div class="question-text">184. 'while' loop runs while condition is true?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">185. 'do...while' runs at least once?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">186. 'switch' statement is for?</div><div class="options-grid"><div class="option">Multiple condition checks</div><div class="option">Turning on lights</div></div><display-answer>Answer: Multiple condition checks</div></div>
+            <div class="mcq-card"><div class="question-text">187. 'default' in switch?</div><div class="options-grid"><div class="option">Runs if no case matches</div><div class="option">Is mandatory</div></div><display-answer>Answer: Runs if no case matches</div></div>
+            <div class="mcq-card"><div class="question-text">188. 'Boolean()' converts to boolean?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">189. Falsey values in JS?</div><div class="options-grid"><div class="option">0, "", null, undefined, NaN, false</div><div class="option">0, -1, false</div></div><display-answer>Answer: 0, "", null, undefined, NaN, false</div></div>
+            <div class="mcq-card"><div class="question-text">190. '!true' evaluates to?</div><div class="options-grid"><div class="option">false</div><div class="option">true</div></div><display-answer>Answer: false</div></div>
+            <div class="mcq-card"><div class="question-text">191. '&&' is logical AND?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">192. '||' is logical OR?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">193. '!!' converts to boolean?</div><div class="options-grid"><div class="option">True</div><div class="option">false</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">194. 'alert()' shows popup?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">195. 'prompt()' gets input?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">196. 'console.log()' prints to?</div><div class="options-grid"><div class="option">Console</div><div class="option">Screen</div></div><display-answer>Answer: Console</div></div>
+            <div class="mcq-card"><div class="question-text">197. 'console.error()' prints error?</div><div class="options-grid"><div class="option">True</div><div class="option">False</div></div><display-answer>Answer: True</div></div>
+            <div class="mcq-card"><div class="question-text">198. Comments in JS?</div><div class="options-grid"><div class="option">// single line, /* multi */</div><div class="option">&lt;!-- --&gt;</div></div><display-answer>Answer: // single line, /* multi */</div></div>
+            <div class="mcq-card"><div class="question-text">199. Comments in HTML?</div><div class="options-grid"><div class="option">&lt;!-- --&gt;</div><div class="option">//</div></div><display-answer>Answer: &lt;!-- --&gt;</div></div>
+            <div class="mcq-card"><div class="question-text">200. Comments in CSS?</div><div class="options-grid"><div class="option">/* */</div><div class="option">//</div></div><display-answer>Answer: /* */</div></div>
+
+
+            </div>
+
+            <h3>Short Answer Questions</h3>
+            <div class="card">
+                <h4>1. Explain the Mobile-First approach.</h4>
+                <p class="answer"><strong>Answer:</strong> Designing for the smallest screen (mobile) first and then
+                    using min-width media queries to add styles for larger screens (tablets, desktops). This ensures
+                    better performance on mobile devices.</p>
+            </div>
+
+            <div class="card">
+                <h4>2. Difference between margin and padding?</h4>
+                <p class="answer"><strong>Answer:</strong> Margin is space <em>outside</em> the border (pushes other
+                    elements away). Padding is space <em>inside</em> the border (between border and content).</p>
+            </div>
+
+            <div class="card">
+                <h4>3. Why use 'key' in React lists?</h4>
+                <p class="answer"><strong>Answer:</strong> Keys help React identify which items have changed, added, or
+                    removed. It optimizes rendering performance by updating only changed items.</p>
+            </div>
+
+            <div class="card">
+                <h4>4. Explain the 'useEffect' dependency array.</h4>
+                <p class="answer"><strong>Answer:</strong> The array passed as the second argument controls when the
+                    effect runs. [] = runs once (mount). [prop] = runs when prop changes. No array = runs every render.
+                </p>
+            </div>
+
+            <div class="card">
+                <h4>5. What is Semantic HTML?</h4>
+                <p class="answer"><strong>Answer:</strong> Using HTML tags that convey meaning about the enclosed
+                    content (e.g., &lt;article&gt; vs &lt;div&gt;). Aids accessibility and SEO.</p>
+            </div>
+        </section>
+
+        <!-- FINAL EXAM SPECIAL SECTION -->
+        <section id="exam-special" class="final-special">
+            <h2>FINAL EXAM SPECIAL: @final/index.html Focus</h2>
+            <p>This section targets the specific content found in the folder.</p>
+
+            <div class="mcq-container">
+                <div class="mcq-card">
+                    <div class="question-text">F1. Fixing a requirements error in maintenance costs how much more?</div>
+                    <div class="options-grid">
+                        <div class="option">A) 10x</div>
+                        <div class="option">B) 50x</div>
+                        <div class="option">C) 100x</div>
+                        <div class="option">D) Same cost</div>
+                    </div>
+                    <display-answer>Answer: C) 100x</display-answer>
+                </div>
+
+                <div class="mcq-card">
+                    <div class="question-text">F2. Which is NOT a characteristic of good requirements (IEEE 830)?</div>
+                    <div class="options-grid">
+                        <div class="option">A) Unambiguous</div>
+                        <div class="option">B) Vague</div>
+                        <div class="option">C) Complete</div>
+                        <div class="option">D) Verifiable</div>
+                    </div>
+                    <display-answer>Answer: B) Vague</display-answer>
+                </div>
+
+                <div class="mcq-card">
+                    <div class="question-text">F3. "Rage Clicks" are identified by:</div>
+                    <div class="options-grid">
+                        <div class="option">A) Slow scrolling</div>
+                        <div class="option">B) Rapid clicking in same area</div>
+                        <div class="option">C) Leaving page quickly</div>
+                        <div class="option">D) Long session time</div>
+                    </div>
+                    <display-answer>Answer: B) Rapid clicking in same area</display-answer>
+                </div>
+
+                <div class="mcq-card">
+                    <div class="question-text">F4. In media queries, min-width targets:</div>
+                    <div class="options-grid">
+                        <div class="option">A) Screens smaller than value</div>
+                        <div class="option">B) Screens larger than value</div>
+                    </div>
+                    <display-answer>Answer: B) Screens larger than value (Mobile-First) </display-answer>
+                </div>
+            </div>
+
+            <h3>Final Exam Specific Short Questions</h3>
+            <div class="card">
+                <h4>Q1: Convert this vague requirement: "The system should be fast".</h4>
+                <p><strong>Answer:</strong> "The web page shall load the hero image within 1.5 seconds on a 4G network."
+                </p>
+            </div>
+
+            <div class="card">
+                <h4>Q2: What is a "viewport" meta tag and why is it needed?</h4>
+                <p><strong>Answer:</strong> It tells the browser how to control the page's dimensions and scaling.
+                    Without it, mobile browsers render pages at desktop widths and shrink them, making text unreadable.
+                </p>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // Add simple interactivity for study mode (revealing answers on click)
+        document.querySelectorAll('.mcq-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const ans = card.querySelector('display-answer');
+                if (ans) ans.style.display = 'block';
+            });
+        });
+    </script>
+
+</body>
+
+</html>
